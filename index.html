@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f8ff">
+  <meta name="description" content="BloomBuild is a proposed 24-hour internal college hackathon. Find the tracks, prizes, schedule, guidelines and team registration details.">
+  <title>BloomBuild 2027 — Make something that matters</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #242943;
+      --muted: #737990;
+      --blue: #a9cdfb;
+      --blue-deep: #668fdb;
+      --pink: #f5bbd2;
+      --pink-deep: #d87ca2;
+      --lilac: #d7cbf7;
+      --paper: #fffdfb;
+      --line: #e9e9f1;
+      --shadow: 0 18px 55px rgba(70, 88, 130, .11);
+      font-family: "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    * { box-sizing: border-box; }
+    body { min-width: 320px; margin: 0; }
+    button, input, select { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button, a, input, select { -webkit-tap-highlight-color: transparent; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+
+    .assumption-bar {
+      padding: 9px 16px;
+      background: #eaf5ff;
+      color: #536687;
+      font-size: 11px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    .assumption-bar strong { color: #3d5d94; }
+
+    .site-header {
+      position: sticky;
+      z-index: 20;
+      top: 0;
+      border-bottom: 1px solid rgba(228, 230, 239, .8);
+      background: rgba(255, 253, 251, .92);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      display: flex;
+      min-height: 74px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; letter-spacing: -.04em; }
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 13px;
+      background: linear-gradient(140deg, var(--blue), var(--pink));
+      color: #353c62;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      font-style: italic;
+      box-shadow: 0 5px 14px rgba(125, 145, 196, .2);
+    }
+    .brand small { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; font-weight: 600; letter-spacing: .13em; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a:not(.button) { color: #5e647b; font-size: 12px; font-weight: 650; transition: color .18s; }
+    .nav-links a:not(.button):hover { color: var(--pink-deep); }
+    .button {
+      display: inline-flex;
+      min-height: 46px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 750;
+      transition: transform .18s, box-shadow .18s, background .18s;
+    }
+    .button:hover { transform: translateY(-2px); background: #3e4668; box-shadow: 0 9px 20px rgba(36, 41, 67, .17); }
+    .button svg { width: 14px; height: 14px; }
+    .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: #fff; color: var(--ink); cursor: pointer; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 76px 0 64px;
+      background:
+        radial-gradient(ellipse at 8% 8%, rgba(169, 205, 251, .32), transparent 34%),
+        radial-gradient(ellipse at 94% 28%, rgba(245, 187, 210, .28), transparent 31%),
+        #fffdfb;
+    }
+    .hero::after {
+      position: absolute;
+      right: -126px;
+      bottom: -240px;
+      width: 440px;
+      height: 440px;
+      border: 1px solid rgba(216, 124, 162, .17);
+      border-radius: 50%;
+      box-shadow: 0 0 0 36px rgba(216, 124, 162, .04), 0 0 0 72px rgba(216, 124, 162, .035);
+      content: "";
+      pointer-events: none;
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 64px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      color: #6478a5;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    .eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--pink-deep); box-shadow: 0 0 0 4px rgba(245, 187, 210, .33); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      max-width: 700px;
+      margin-bottom: 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 500;
+      letter-spacing: -.065em;
+      line-height: .99;
+    }
+    .title-accent { position: relative; z-index: 0; white-space: nowrap; }
+    .title-accent::after {
+      position: absolute;
+      z-index: -1;
+      right: -4px;
+      bottom: 3px;
+      left: -3px;
+      height: 25%;
+      border-radius: 60% 40% 50% 45%;
+      background: var(--pink);
+      content: "";
+      transform: rotate(-1.5deg);
+    }
+    .hero-copy { max-width: 510px; margin-bottom: 26px; color: #6d7288; font-size: 15px; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .button-primary { background: #718fd2; }
+    .button-primary:hover { background: #5e7cc1; }
+    .button-soft { border: 1px solid #e3e5ee; background: rgba(255,255,255,.72); color: var(--ink); }
+    .button-soft:hover { background: #fff; }
+    .hero-note { margin: 19px 0 0; color: #9296a8; font-size: 10px; }
+    .hero-note span { color: #c26e91; }
+
+    .hero-art {
+      position: relative;
+      display: grid;
+      min-height: 390px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 45% 45% 32px 32px;
+      background: linear-gradient(145deg, rgba(222,239,255,.88), rgba(255,229,238,.8));
+      box-shadow: var(--shadow);
+    }
+    .art-orbit { position: absolute; width: 270px; height: 270px; border: 1px dashed rgba(102,143,219,.33); border-radius: 50%; }
+    .art-sun { position: absolute; top: 31px; right: 37px; width: 56px; height: 56px; border-radius: 50%; background: #fff0bd; opacity: .9; }
+    .art-spark { position: absolute; color: #b8799a; font-size: 25px; }
+    .spark-one { top: 63px; left: 48px; }
+    .spark-two { right: 48px; bottom: 73px; font-size: 19px; }
+    .art-blob { position: absolute; bottom: 45px; left: 40px; width: 82px; height: 52px; border-radius: 54% 46% 67% 33%; background: rgba(245,187,210,.62); transform: rotate(-24deg); }
+    .art-card {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      width: 220px;
+      height: 245px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.85);
+      border-radius: 30px;
+      background: rgba(255,255,255,.58);
+      box-shadow: 0 18px 40px rgba(104,126,180,.14);
+      transform: rotate(-4deg);
+      backdrop-filter: blur(5px);
+    }
+    .art-card svg { width: 136px; height: 146px; }
+    .art-label {
+      position: absolute;
+      right: -29px;
+      bottom: 38px;
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 10px 24px rgba(86,99,144,.12);
+      color: #6c7190;
+      font-size: 10px;
+      font-weight: 700;
+      transform: rotate(4deg);
+    }
+    .art-label strong { display: block; margin-bottom: 3px; color: #bd6c90; font-family: Georgia, serif; font-size: 19px; font-weight: 500; }
+    .event-chip {
+      position: absolute;
+      top: 35px;
+      left: -21px;
+      z-index: 3;
+      padding: 13px 15px;
+      border: 1px solid #fff;
+      border-radius: 14px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 10px 25px rgba(86,99,144,.1);
+      color: #70768d;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transform: rotate(-5deg);
+    }
+    .event-chip strong { display: block; margin-top: 4px; color: var(--ink); font-family: Georgia, serif; font-size: 18px; letter-spacing: 0; text-transform: none; }
+
+    .quick-facts { padding: 0 0 42px; background: #fffdfb; }
+    .facts-grid { display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden; border: 1px solid var(--line); border-radius: 20px; background: #fff; box-shadow: 0 10px 30px rgba(64,84,133,.05); }
+    .fact { min-height: 88px; padding: 19px 22px; border-right: 1px solid var(--line); }
+    .fact:last-child { border-right: 0; }
+    .fact-label { display: block; margin-bottom: 7px; color: #969bad; font-size: 9px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    .fact strong { color: #3d4565; font-family: Georgia, serif; font-size: 18px; font-weight: 500; }
+
+    .section { padding: 92px 0; }
+    .section-blue { background: #f3f8ff; }
+    .section-pink { background: #fff5f8; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 34px; }
+    .section-kicker { margin-bottom: 10px; color: #bb7391; font-size: 10px; font-weight: 800; letter-spacing: .15em; text-transform: uppercase; }
+    h2 { margin-bottom: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(34px, 4vw, 48px); font-weight: 500; letter-spacing: -.05em; line-height: 1.08; }
+    .section-intro { max-width: 435px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+
+    .track-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+    .track-card {
+      min-height: 262px;
+      padding: 23px 20px;
+      border: 1px solid rgba(222,228,240,.9);
+      border-radius: 19px;
+      background: rgba(255,255,255,.87);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .track-card:hover { transform: translateY(-4px); box-shadow: 0 15px 32px rgba(84,101,150,.1); }
+    .track-icon { display: grid; width: 43px; height: 43px; margin-bottom: 25px; place-items: center; border-radius: 14px; color: #526d9c; }
+    .track-icon svg { width: 22px; height: 22px; }
+    .track-card:nth-child(1) .track-icon { background: #e2efff; }
+    .track-card:nth-child(2) .track-icon { background: #ffe4ee; color: #ae6582; }
+    .track-card:nth-child(3) .track-icon { background: #eee8ff; color: #7d68ad; }
+    .track-card:nth-child(4) .track-icon { background: #fff1d7; color: #a17b38; }
+    .track-card h3 { margin-bottom: 9px; font-size: 16px; letter-spacing: -.025em; }
+    .track-card p { margin-bottom: 16px; color: #7c8195; font-size: 11px; line-height: 1.65; }
+    .prompt { padding-top: 13px; border-top: 1px solid #edf0f5; color: #5c6582; font-size: 10px; line-height: 1.55; }
+    .prompt strong { display: block; margin-bottom: 4px; color: #b77390; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+
+    .prize-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px; }
+    .prize-copy { max-width: 470px; }
+    .prize-copy > p:last-child { margin: 16px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .prize-stack { display: grid; gap: 11px; }
+    .prize-row { display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 15px; padding: 15px 19px; border: 1px solid #f0e2e8; border-radius: 16px; background: rgba(255,255,255,.83); }
+    .medal { display: grid; width: 43px; height: 43px; place-items: center; border-radius: 50%; background: #ffefc7; color: #ad8242; font-size: 18px; }
+    .prize-row:nth-child(2) .medal { background: #e6f0ff; color: #6586bc; }
+    .prize-row:nth-child(3) .medal { background: #f5e8dd; color: #a37a63; }
+    .prize-place { color: #8d91a2; font-size: 9px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .prize-name { display: block; margin-top: 4px; color: #353b59; font-size: 13px; font-weight: 700; }
+    .prize-amount { color: #4a5274; font-family: Georgia, serif; font-size: 21px; }
+    .prize-footnote { margin: 4px 4px 0; color: #9699a9; font-size: 10px; line-height: 1.6; }
+
+    .schedule-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 68px; }
+    .schedule-intro p:last-child { max-width: 360px; margin-top: 17px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .schedule-note { display: inline-block; margin-top: 5px; padding: 9px 12px; border-radius: 10px; background: #e7f2ff; color: #5f759d; font-size: 10px; font-weight: 700; }
+    .timeline { position: relative; padding-left: 28px; }
+    .timeline::before { position: absolute; top: 8px; bottom: 9px; left: 7px; width: 1px; background: #d5deef; content: ""; }
+    .time-item { position: relative; display: grid; grid-template-columns: 94px 1fr; gap: 15px; padding: 0 0 22px; }
+    .time-item::before { position: absolute; top: 3px; left: -26px; width: 9px; height: 9px; border: 3px solid #f3f8ff; border-radius: 50%; background: #ce8aaa; box-shadow: 0 0 0 1px #ce8aaa; content: ""; }
+    .time { color: #8490a8; font-size: 10px; font-weight: 750; }
+    .time-description strong { display: block; margin-bottom: 4px; color: #3c435f; font-size: 13px; }
+    .time-description span { color: #83889b; font-size: 11px; line-height: 1.55; }
+
+    .guideline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 34px; }
+    .guideline { display: flex; gap: 13px; padding: 18px; border: 1px solid #f2e3e9; border-radius: 15px; background: rgba(255,255,255,.78); }
+    .check { display: grid; flex: 0 0 25px; height: 25px; place-items: center; border-radius: 50%; background: #fbe0eb; color: #a95f7d; font-size: 12px; font-weight: 800; }
+    .guideline strong { display: block; margin-bottom: 4px; color: #464b66; font-size: 12px; }
+    .guideline p { margin: 0; color: #808497; font-size: 10px; line-height: 1.65; }
+
+    .register-section { padding: 88px 0; background: #f4f8ff; }
+    .register-layout { display: grid; grid-template-columns: .78fr 1.22fr; align-items: start; gap: 58px; }
+    .register-copy { position: sticky; top: 110px; }
+    .register-copy > p:last-child { max-width: 350px; margin-top: 16px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    .deadline-pill { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 10px 13px; border: 1px solid #e1eaf8; border-radius: 999px; background: #fff; color: #657393; font-size: 10px; font-weight: 700; }
+    .deadline-pill svg { width: 14px; height: 14px; color: #cf7e9f; }
+    .register-card { padding: 30px; border: 1px solid #e8ebf3; border-radius: 22px; background: #fff; box-shadow: var(--shadow); }
+    .register-card h3 { margin-bottom: 6px; font-size: 18px; letter-spacing: -.03em; }
+    .form-hint { margin-bottom: 23px; color: #898ea0; font-size: 11px; line-height: 1.6; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 14px; }
+    .field { min-width: 0; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { display: block; margin-bottom: 7px; color: #50566f; font-size: 10px; font-weight: 750; }
+    .field input, .field select {
+      width: 100%;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid #e3e6ee;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: #444b68;
+      font-size: 11px;
+      transition: border-color .16s, box-shadow .16s;
+    }
+    .field input::placeholder { color: #abb0bf; }
+    .field input:focus, .field select:focus { border-color: #8bb2e8; box-shadow: 0 0 0 3px rgba(169,205,251,.26); }
+    .consent { display: flex; align-items: flex-start; gap: 9px; margin: 18px 0; color: #73798e; font-size: 10px; line-height: 1.55; cursor: pointer; }
+    .consent input { flex: 0 0 15px; width: 15px; height: 15px; margin: 0; accent-color: #7999d8; }
+    .submit-button { width: 100%; }
+    .form-status { min-height: 18px; margin: 13px 0 0; color: #46745d; font-size: 11px; line-height: 1.6; }
+    .form-disclaimer { margin: 9px 0 0; color: #999eac; font-size: 9px; line-height: 1.6; }
+
+    .footer { padding: 28px 0; border-top: 1px solid var(--line); background: #fffdfb; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .footer-brand { color: #666d85; font-size: 11px; font-weight: 750; }
+    .footer-note { margin: 0; color: #9599a8; font-size: 10px; text-align: right; }
+    :focus-visible { outline: 3px solid rgba(102,143,219,.72); outline-offset: 3px; }
+
+    @media (max-width: 900px) {
+      .hero-grid { gap: 38px; }
+      .hero-art { min-height: 340px; }
+      .track-grid { grid-template-columns: repeat(2, 1fr); }
+      .track-card { min-height: 230px; }
+      .prize-layout, .schedule-layout, .register-layout { gap: 38px; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 36px, 520px); }
+      .nav { min-height: 66px; }
+      .menu-toggle { display: grid; place-items: center; }
+      .menu-toggle svg { width: 19px; height: 19px; }
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 18px 18px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255,253,251,.98);
+        box-shadow: 0 14px 22px rgba(70,88,130,.08);
+      }
+      .nav-links.open { display: flex; flex-direction: column; }
+      .nav-links a:not(.button) { padding: 13px 4px; border-bottom: 1px solid #f0f0f4; }
+      .nav-links .button { margin-top: 13px; }
+      .hero { padding: 55px 0 38px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 35px; }
+      h1 { font-size: clamp(52px, 13vw, 72px); }
+      .hero-copy { font-size: 13px; }
+      .hero-art { width: min(100%, 400px); min-height: 315px; margin-inline: auto; }
+      .art-orbit { width: 225px; height: 225px; }
+      .art-card { width: 184px; height: 210px; }
+      .art-card svg { width: 119px; height: 128px; }
+      .event-chip { left: 4px; }
+      .art-label { right: 1px; }
+      .quick-facts { padding-bottom: 26px; }
+      .facts-grid { grid-template-columns: 1fr 1fr; }
+      .fact { min-height: 76px; padding: 15px; border-bottom: 1px solid var(--line); }
+      .fact:nth-child(2) { border-right: 0; }
+      .fact:nth-child(3), .fact:nth-child(4) { border-bottom: 0; }
+      .section { padding: 67px 0; }
+      .section-heading { align-items: flex-start; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+      .section-intro { font-size: 12px; }
+      .track-grid { gap: 10px; }
+      .track-card { min-height: 248px; padding: 17px 14px; }
+      .track-icon { margin-bottom: 19px; }
+      .track-card h3 { font-size: 14px; }
+      .track-card p { font-size: 10px; }
+      .prompt { font-size: 9px; }
+      .prize-layout, .schedule-layout, .register-layout { grid-template-columns: 1fr; gap: 28px; }
+      .prize-copy > p:last-child, .schedule-intro p:last-child, .register-copy > p:last-child { font-size: 12px; }
+      .schedule-layout { gap: 31px; }
+      .schedule-intro p:last-child { margin-bottom: 10px; }
+      .guideline-grid { grid-template-columns: 1fr; gap: 9px; margin-top: 25px; }
+      .guideline { padding: 15px; }
+      .register-section { padding: 67px 0; }
+      .register-copy { position: static; }
+      .register-card { padding: 23px 18px; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .footer-note { text-align: left; }
+    }
+    @media (max-width: 390px) {
+      .wrap { width: calc(100% - 30px); }
+      .brand { font-size: 13px; }
+      .hero-actions { align-items: stretch; flex-direction: column; }
+      .hero-actions .button { width: 100%; }
+      .track-card { min-height: 270px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .prize-row { grid-template-columns: 40px 1fr auto; gap: 10px; padding: 13px; }
+      .medal { width: 38px; height: 38px; }
+      .prize-amount { font-size: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="assumption-bar"><strong>PROPOSED EVENT PLAN</strong> · Dates, venue, prizes and guidelines are sample assumptions for college review.</div>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="BloomBuild home">
+        <span class="brand-mark" aria-hidden="true">b.</span>
+        <span>bloombuild<small>INTERNAL HACKATHON · 2027</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="nav-links" id="nav-links">
+        <a href="#tracks">Tracks</a>
+        <a href="#prizes">Prizes</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#guidelines">Guidelines</a>
+        <a class="button button-primary" href="#register">Register your team <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grid wrap">
+        <div>
+          <p class="eyebrow"><span class="dot"></span> One campus · one big idea · 24 hours</p>
+          <h1>Make room<br>for <span class="title-accent">what’s next.</span></h1>
+          <p class="hero-copy">A cozy corner of campus, a team that gets you, and one whole day to build something useful. Bring your curiosity; we’ll bring the snacks, mentors, and a little friendly competition.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#register">Save your team a spot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+            <a class="button button-soft" href="#tracks">Find your track</a>
+          </div>
+          <p class="hero-note"><span>✿</span> Internal college event · Free to join · All departments welcome</p>
+        </div>
+
+        <div class="hero-art" aria-label="Playful illustration of an idea taking root">
+          <div class="art-orbit" aria-hidden="true"></div>
+          <div class="art-sun" aria-hidden="true"></div>
+          <span class="art-spark spark-one" aria-hidden="true">✳</span>
+          <span class="art-spark spark-two" aria-hidden="true">✦</span>
+          <div class="art-blob" aria-hidden="true"></div>
+          <div class="event-chip">Save the dates<strong>Jan 16—17</strong></div>
+          <div class="art-card" aria-hidden="true">
+            <svg viewBox="0 0 140 150" fill="none">
+              <path d="M70 127V72m0 29c-4-24-19-33-36-35 2 17 14 29 36 31m0-16c4-24 19-33 36-35-2 17-14 29-36 31" stroke="#688db8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M70 72c-4-14-2-26 7-35" stroke="#688db8" stroke-width="4" stroke-linecap="round"/>
+              <path d="M74 43c-17-1-24-10-24-21 14 0 23 7 24 21Zm2-7c1-16 9-24 22-25 0 13-7 22-22 25Z" fill="#efb6ce" stroke="#d87ca2" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M45 127h51m-43 8h35" stroke="#b37b9b" stroke-width="4" stroke-linecap="round"/>
+              <path d="M28 115c-5-3-8-8-9-14m91 14c5-3 8-8 9-14" stroke="#9bb4dc" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="23" cy="90" r="4" fill="#f3c8d9"/><circle cx="117" cy="91" r="4" fill="#c6d9f4"/>
+            </svg>
+          </div>
+          <div class="art-label"><strong>₹30,000</strong>in prizes to grow</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-facts" aria-label="Event details">
+      <div class="facts-grid wrap">
+        <div class="fact"><span class="fact-label">When</span><strong>Jan 16—17, 2027</strong></div>
+        <div class="fact"><span class="fact-label">The format</span><strong>24-hour build</strong></div>
+        <div class="fact"><span class="fact-label">Team size</span><strong>2–4 students</strong></div>
+        <div class="fact"><span class="fact-label">Entry</span><strong>Free · internal</strong></div>
+      </div>
+    </section>
+
+    <section class="section section-blue" id="tracks">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><p class="section-kicker">01 / Pick a direction</p><h2>Four tracks.<br>Room to explore.</h2></div>
+          <p class="section-intro">Choose one challenge to focus your build. Have a different idea that helps campus life? Pitch it to the organizers before the event and we’ll help find its home.</p>
+        </div>
+        <div class="track-grid">
+          <article class="track-card">
+            <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5m0 14h16M7 15l4-4 3 2 5-6"/><path d="M15 7h4v4"/></svg></div>
+            <h3>Learning, reimagined</h3>
+            <p>Make studying, sharing knowledge, or finding academic support feel easier.</p>
+            <div class="prompt"><strong>Try this problem</strong>Design a peer-learning tool that helps students find the right study partner or resource.</div>
+          </article>
+          <article class="track-card">
+            <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-4.4-8-11a4.5 4.5 0 0 1 8-2.9A4.5 4.5 0 0 1 20 10c0 6.6-8 11-8 11Z"/><path d="M8 12h2l1-2 2 4 1-2h2"/></svg></div>
+            <h3>Wellbeing & belonging</h3>
+            <p>Help students feel supported, included, and connected to their campus community.</p>
+            <div class="prompt"><strong>Try this problem</strong>Create a thoughtful way for a new student to discover clubs, support, and people.</div>
+          </article>
+          <article class="track-card">
+            <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M4.6 4.6l2.1 2.1m10.6 10.6 2.1 2.1M3 12h3m12 0h3M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg></div>
+            <h3>A greener campus</h3>
+            <p>Make it simpler to save energy, reduce waste, and care for shared spaces.</p>
+            <div class="prompt"><strong>Try this problem</strong>Build a small intervention that helps our campus make one more sustainable choice.</div>
+          </article>
+          <article class="track-card">
+            <div class="track-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3zM7 7V4h10v3m-7 5 2 2 4-4"/><path d="M3 11h18"/></svg></div>
+            <h3>Campus, made simpler</h3>
+            <p>Smooth out the everyday moments that make college life harder than it needs to be.</p>
+            <div class="prompt"><strong>Try this problem</strong>Prototype a clearer way to find a campus service, space, event, or everyday answer.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-pink" id="prizes">
+      <div class="prize-layout wrap">
+        <div class="prize-copy">
+          <p class="section-kicker">02 / A little something for your big idea</p>
+          <h2>Good ideas<br>deserve a <span class="title-accent">little love.</span></h2>
+          <p>Three teams will share a proposed ₹30,000 prize pool. We’ll celebrate clear thinking, useful prototypes, and the care you put into your solution—not just the fanciest tech.</p>
+        </div>
+        <div class="prize-stack">
+          <div class="prize-row"><span class="medal" aria-hidden="true">✿</span><div><span class="prize-place">First place</span><span class="prize-name">BloomBuild champion</span></div><strong class="prize-amount">₹15,000</strong></div>
+          <div class="prize-row"><span class="medal" aria-hidden="true">✦</span><div><span class="prize-place">Second place</span><span class="prize-name">People’s pick</span></div><strong class="prize-amount">₹10,000</strong></div>
+          <div class="prize-row"><span class="medal" aria-hidden="true">❋</span><div><span class="prize-place">Third place</span><span class="prize-name">Fresh perspective</span></div><strong class="prize-amount">₹5,000</strong></div>
+          <p class="prize-footnote">* Proposed prize amounts. Subject to college approval and applicable institutional rules.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="schedule">
+      <div class="schedule-layout wrap">
+        <div class="schedule-intro">
+          <p class="section-kicker">03 / A day to make it happen</p>
+          <h2>24 hours,<br>nicely paced.</h2>
+          <p>We’ll kick things off Saturday morning and wrap up Sunday morning. There’ll be check-ins, mentor time, meals, and room to step away and recharge.</p>
+          <span class="schedule-note">Proposed venue: Main campus · venue to be confirmed</span>
+        </div>
+        <div class="timeline" aria-label="Proposed event schedule">
+          <div class="time-item"><span class="time">Sat · 8:00 AM</span><div class="time-description"><strong>Doors open & check-in</strong><span>Find your team, pick up your badge, settle in.</span></div></div>
+          <div class="time-item"><span class="time">Sat · 9:00 AM</span><div class="time-description"><strong>Welcome, challenge reveal & build begins</strong><span>Meet the mentors, hear the details, and start your 24-hour build.</span></div></div>
+          <div class="time-item"><span class="time">Sat · 6:00 PM</span><div class="time-description"><strong>Midpoint check-in</strong><span>Share progress and get unstuck with a mentor.</span></div></div>
+          <div class="time-item"><span class="time">Sun · 9:00 AM</span><div class="time-description"><strong>24-hour build ends & demos</strong><span>Show what you made to the judges and other teams.</span></div></div>
+          <div class="time-item"><span class="time">Sun · 11:00 AM</span><div class="time-description"><strong>Winners & wrap-up</strong><span>Celebrate, share feedback, and head out together.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-pink" id="guidelines">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><p class="section-kicker">04 / The kind, fair-play bits</p><h2>Good people.<br>Good building.</h2></div>
+          <p class="section-intro">A few simple guidelines keep the weekend welcoming, fair, and fun for everyone. More event-specific details will be shared with registered teams.</p>
+        </div>
+        <div class="guideline-grid">
+          <article class="guideline"><span class="check" aria-hidden="true">✓</span><div><strong>Who can join</strong><p>Current students of the college, from any department or year. Bring a team of 2–4 students; solo registrations can ask organizers for a match.</p></div></article>
+          <article class="guideline"><span class="check" aria-hidden="true">✓</span><div><strong>Build during the event</strong><p>Start a new project at kickoff. You may use existing libraries, APIs, and design tools; disclose them in your final submission.</p></div></article>
+          <article class="guideline"><span class="check" aria-hidden="true">✓</span><div><strong>Be thoughtful with data</strong><p>Use mock or public data only. Don't collect real personal, health, or sensitive information from students.</p></div></article>
+          <article class="guideline"><span class="check" aria-hidden="true">✓</span><div><strong>Make it welcoming</strong><p>Treat participants, mentors, and volunteers with respect. Harassment or discriminatory behavior is not okay.</p></div></article>
+          <article class="guideline"><span class="check" aria-hidden="true">✓</span><div><strong>Submit and demo</strong><p>Submit a working prototype, a short project description, and a 3-minute demo by the announced deadline.</p></div></article>
+          <article class="guideline"><span class="check" aria-hidden="true">✓</span><div><strong>How judging works</strong><p>Proposed criteria: usefulness (30%), working prototype (30%), creativity (20%), and clarity of demo (20%). Judges’ decisions are final.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="register-section" id="register">
+      <div class="register-layout wrap">
+        <div class="register-copy">
+          <p class="section-kicker">05 / Your next little adventure</p>
+          <h2>Bring your<br>people. Bring<br>your <span class="title-accent">curiosity.</span></h2>
+          <p>Registration is free. One person can submit the team's details; please have each teammate's college email ready. The assumed deadline is January 10, 2027.</p>
+          <span class="deadline-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg> Proposed deadline · Jan 10, 2027</span>
+        </div>
+        <div class="register-card">
+          <h3>Register your team</h3>
+          <p class="form-hint">Fill in the details below to preview your registration.</p>
+          <form id="registration-form">
+            <div class="form-grid">
+              <div class="field"><label for="captain-name">Team lead name *</label><input id="captain-name" name="captain-name" type="text" placeholder="Your full name" autocomplete="name" required></div>
+              <div class="field"><label for="college-email">College email *</label><input id="college-email" name="college-email" type="email" placeholder="you@college.edu" autocomplete="email" required></div>
+              <div class="field"><label for="team-name">Team name *</label><input id="team-name" name="team-name" type="text" placeholder="Something memorable" required></div>
+              <div class="field"><label for="team-size">Team size *</label><select id="team-size" name="team-size" required><option value="" selected disabled>Choose size</option><option value="2">2 students</option><option value="3">3 students</option><option value="4">4 students</option></select></div>
+              <div class="field full"><label for="track-choice">Preferred track *</label><select id="track-choice" name="track-choice" required><option value="" selected disabled>Choose a track</option><option>Learning, reimagined</option><option>Wellbeing & belonging</option><option>A greener campus</option><option>Campus, made simpler</option><option>Open idea (ask organizers)</option></select></div>
+              <div class="field full"><label for="teammate-emails">Teammate college emails</label><input id="teammate-emails" name="teammate-emails" type="text" placeholder="Separate each email with a comma"></div>
+            </div>
+            <label class="consent"><input type="checkbox" name="guidelines" required><span>Our team agrees to follow the event guidelines and understands these are proposed event details. *</span></label>
+            <button class="button button-primary submit-button" type="submit">Preview registration <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+            <p class="form-disclaimer">Demo only: this form does not send or store your information. Official registration opens after the college confirms event details.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner wrap">
+      <div class="footer-brand">bloombuild · Internal college hackathon, 2027</div>
+      <p class="footer-note">Proposed event plan · Dates, venue, prizes and rules require college confirmation.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector("#nav-links");
+    const registrationForm = document.querySelector("#registration-form");
+    const formStatus = document.querySelector("#form-status");
+
+    menuToggle.addEventListener("click", () => {
+      const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isExpanded));
+      menuToggle.setAttribute("aria-label", isExpanded ? "Open navigation menu" : "Close navigation menu");
+      navLinks.classList.toggle("open", !isExpanded);
+    });
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation menu");
+      }
+    });
+
+    registrationForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(registrationForm);
+      const teamName = formData.get("team-name");
+      formStatus.textContent = `Thanks, ${teamName}! Your demo registration is ready, but it has not been submitted to the college.`;
+    });
+  </script>
+</body>
+</html>
